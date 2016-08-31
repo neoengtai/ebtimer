@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ebtimerApp">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Let's hunt EB</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style type="text/css">
+        .dark {
+            background: lightgray;
+        }
+
+        .grim {
+            background: lightgreen;
+        }
+
+        .notify {
+            border: 3px solid red;
+        }
+
+        .ignore {
+            border: 3px solid white;
+        }
+
+        .channelWrapper {
+            margin: 5px;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body ng-controller="EbtimerController">
+    <div class="container">
+        <div class="row" ng-repeat="map in maps">
+            <div class="row">
+                <div class="col-xs-12"><p class="text-center">{{map.name}}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2" ng-repeat="channel in map.channels">
+                    <div class="channelWrapper" ng-class="{notify: channel.timer == null, ignore: channel.timer != null, grim: channel.state=='Grim', dark: channel.state=='Dark'}">
+                        <div class="row">
+                            <div class="col-xs-12"><p class="text-center">{{$index + 1}}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12"><p class="text-center">{{channel.state}}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4"><input type="button" name="" ng-click="grim($parent.$index, $index)" value="G"> </div>
+                            <div class="col-xs-4"><input type="button" name="" ng-click="dark($parent.$index, $index)" value="D"> </div>
+                            <div class="col-xs-4"><input type="button" name="" ng-click="killed($parent.$index, $index)" value="K"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
